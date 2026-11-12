@@ -6,46 +6,46 @@
   <meta name="color-scheme" content="light">
   <title>Carteira a Dois</title>
   <style>
-:root{font-family:"DM Sans",system-ui,sans-serif;color:#142d29;background:#edf3ef;font-synthesis:none;line-height:1.5}
-*{box-sizing:border-box}
-body{margin:0}
-main{width:min(100% - 32px,900px);margin:auto;padding:22px 0 44px}
-header{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:24px}
-header div{display:flex;gap:16px;align-items:center}
-a{color:#1b5d4c}
-.marca{font-size:1.18rem;font-weight:850;text-decoration:none;color:inherit;letter-spacing:-.035em}
-.hero{background:linear-gradient(125deg,#102e28,#1b5140);color:white;border-radius:26px;padding:clamp(22px,5vw,45px);display:flex;align-items:end;justify-content:space-between;gap:20px}
-h1,h2,p{margin:0}
-h1{font-size:clamp(2.5rem,8vw,4.75rem);line-height:1.05;letter-spacing:-.065em;margin:.12em 0 .2em;overflow-wrap:anywhere}
-h2{font-size:1.13rem;letter-spacing:-.02em}
-.etiqueta{font-size:.74rem;font-weight:750;letter-spacing:.15em;color:#c4e8d4}
-.hero p:last-child{color:#d9eee5}
-.hero aside{border:1px solid #76a593;border-radius:14px;padding:12px 16px;font-size:.86rem;flex-shrink:0}
-aside span,time{display:block}
-aside span{color:#c4e8d4}
-.pessoas{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:14px 0}
-.cartao{background:#fff;border:1px solid #d5e4db;border-radius:18px;min-width:0}
-.pessoa{display:flex;align-items:flex-start;gap:12px;padding:clamp(12px,3vw,22px)}
-.pessoa strong{font-size:clamp(1rem,3vw,1.5rem);overflow-wrap:anywhere}
-.pessoa p,time,.vazio{font-size:.85rem;color:#49635a}
-.avatar{display:grid;place-items:center;background:#daf1e1;border-radius:50%;width:34px;height:34px;flex:none;font-weight:800}
-.douglas{background:#efe9d7}
-.bloco{padding:clamp(16px,4vw,26px);margin-bottom:14px}
-form,.filtros{display:grid;grid-template-columns:repeat(2,minmax(0,1fr)) auto;gap:12px;align-items:end;margin-top:13px}
-label{display:grid;gap:4px;font-size:.86rem;font-weight:700;min-width:0}
-input,select,button{font:inherit;min-height:44px;border-radius:10px}
-input,select{width:100%;min-width:0;border:1px solid #aebfb5;padding:8px 10px;font-size:1rem;color:inherit;background:white}
-button{background:#175e48;color:white;border:1px solid transparent;padding:8px 16px;cursor:pointer;font-weight:750}
-button:disabled{opacity:.6;cursor:default}
-.secundario{background:#ecf5ee;color:#17513e}
-:focus-visible{outline:3px solid #398a70;outline-offset:3px}
-.historico{display:flex;justify-content:space-between;align-items:center;gap:10px}
-.filtros{grid-template-columns:repeat(2,minmax(0,190px))}
-ul{padding:0;margin:14px 0 0;list-style:none}
-li{display:flex;align-items:center;justify-content:space-between;gap:12px;border-top:1px solid #dce7e1;padding:12px 0}
-.vazio,.mensagem,.erro{margin-top:12px}
-.mensagem{color:#175e48}.erro{color:#9a3027}
-@media(max-width:560px){.hero{align-items:start;flex-direction:column;gap:12px}.hero aside{display:flex;gap:10px;flex-wrap:wrap}.pessoa{gap:7px}.avatar{width:25px;height:25px;font-size:.8rem}form button{grid-column:1/-1}}
+    :root{font-family:"DM Sans",system-ui,sans-serif;color:#142d29;background:#edf3ef;font-synthesis:none;line-height:1.5}
+    *{box-sizing:border-box}
+    body{margin:0}
+    main{width:min(100% - 32px,900px);margin:auto;padding:22px 0 44px}
+    header{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:24px}
+    header div{display:flex;gap:16px;align-items:center}
+    a{color:#1b5d4c}
+    .marca{font-size:1.18rem;font-weight:850;text-decoration:none;color:inherit;letter-spacing:-.035em}
+    .hero{background:linear-gradient(125deg,#102e28,#1b5140);color:white;border-radius:26px;padding:clamp(22px,5vw,45px);display:flex;align-items:end;justify-content:space-between;gap:20px}
+    h1,h2,p{margin:0}
+    h1{font-size:clamp(2.5rem,8vw,4.75rem);line-height:1.05;letter-spacing:-.065em;margin:.12em 0 .2em;overflow-wrap:anywhere}
+    h2{font-size:1.13rem;letter-spacing:-.02em}
+    .etiqueta{font-size:.74rem;font-weight:750;letter-spacing:.15em;color:#c4e8d4}
+    .hero p:last-child{color:#d9eee5}
+    .hero aside{border:1px solid #76a593;border-radius:14px;padding:12px 16px;font-size:.86rem;flex-shrink:0}
+    aside span,time{display:block}
+    aside span{color:#c4e8d4}
+    .pessoas{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:14px 0}
+    .cartao{background:#fff;border:1px solid #d5e4db;border-radius:18px;min-width:0}
+    .pessoa{display:flex;align-items:flex-start;gap:12px;padding:clamp(12px,3vw,22px)}
+    .pessoa strong{font-size:clamp(1rem,3vw,1.5rem);overflow-wrap:anywhere}
+    .pessoa p,time,.vazio{font-size:.85rem;color:#49635a}
+    .avatar{display:grid;place-items:center;background:#daf1e1;border-radius:50%;width:34px;height:34px;flex:none;font-weight:800}
+    .douglas{background:#efe9d7}
+    .bloco{padding:clamp(16px,4vw,26px);margin-bottom:14px}
+    form,.filtros{display:grid;grid-template-columns:repeat(2,minmax(0,1fr)) auto;gap:12px;align-items:end;margin-top:13px}
+    label{display:grid;gap:4px;font-size:.86rem;font-weight:700;min-width:0}
+    input,select,button{font:inherit;min-height:44px;border-radius:10px}
+    input,select{width:100%;min-width:0;border:1px solid #aebfb5;padding:8px 10px;font-size:1rem;color:inherit;background:white}
+    button{background:#175e48;color:white;border:1px solid transparent;padding:8px 16px;cursor:pointer;font-weight:750}
+    button:disabled{opacity:.6;cursor:default}
+    .secundario{background:#ecf5ee;color:#17513e}
+    :focus-visible{outline:3px solid #398a70;outline-offset:3px}
+    .historico{display:flex;justify-content:space-between;align-items:center;gap:10px}
+    .filtros{grid-template-columns:repeat(2,minmax(0,190px))}
+    ul{padding:0;margin:14px 0 0;list-style:none}
+    li{display:flex;align-items:center;justify-content:space-between;gap:12px;border-top:1px solid #dce7e1;padding:12px 0}
+    .vazio,.mensagem,.erro{margin-top:12px}
+    .mensagem{color:#175e48}
+    .erro{color:#9a3027}
     [hidden]{display:none!important}
     .entrada{max-width:480px;margin:0 auto}
     .entrada form{grid-template-columns:1fr}
@@ -55,12 +55,27 @@ li{display:flex;align-items:center;justify-content:space-between;gap:12px;border
     summary{cursor:pointer;font-weight:750}
     pre{overflow:auto;background:#edf3ef;padding:12px;border-radius:10px}
     .config li{display:list-item;border:0;padding:4px 0}
+    @media(max-width:560px){
+      .hero{align-items:start;flex-direction:column;gap:12px}
+      .hero aside{display:flex;gap:10px;flex-wrap:wrap}
+      .pessoa{gap:7px}
+      .avatar{width:25px;height:25px;font-size:.8rem}
+      form button{grid-column:1/-1}
+    }
   </style>
 </head>
 <body>
 <main>
-  <header><a class="marca" href="./">Carteira a Dois</a><div id="sessao" hidden><span id="usuario"></span><button id="sair" class="secundario" type="button">Sair</button></div></header>
+  <header>
+    <a class="marca" href="./">Carteira a Dois</a>
+    <div id="sessao" hidden>
+      <span id="usuario"></span>
+      <button id="sair" class="secundario" type="button">Sair</button>
+    </div>
+  </header>
+
   <p id="aviso" class="erro" role="alert" hidden></p>
+
   <section id="config" class="cartao bloco" hidden>
     <h2>Configurar o Firebase</h2>
     <ol>
@@ -70,7 +85,8 @@ li{display:flex;align-items:center;justify-content:space-between;gap:12px;border
       <li>Na aba <strong>Data</strong>, crie a coleção <code>membros</code> com um documento para cada pessoa. Use o UID como ID do documento e adicione o campo <code>nome</code>, do tipo <strong>string</strong>, com o nome que deve aparecer no painel. Para trocar um nome, edite esse campo.</li>
       <li>Hospede o HTML em HTTPS. Para abrir pela página inicial do site, salve como <code>index.html</code>. Abra o mesmo endereço nos dois celulares e entre com a conta de cada pessoa.</li>
     </ol>
-    <details class="config"><summary>Regras do Firestore para copiar</summary>
+    <details class="config">
+      <summary>Regras do Firestore para copiar</summary>
 <pre id="regras">rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
@@ -99,6 +115,7 @@ service cloud.firestore {
 }</pre>
     </details>
   </section>
+
   <section id="entrada" class="cartao bloco entrada" hidden>
     <h1>Entrar na carteira</h1>
     <form id="login">
@@ -107,12 +124,19 @@ service cloud.firestore {
       <button type="submit">Entrar</button>
     </form>
   </section>
+
   <div id="painel" hidden>
     <section class="hero" aria-labelledby="total">
-      <div><p class="etiqueta">TOTAL APORTADO</p><h1 id="total">…</h1><p>Este mês <strong id="total-mes">…</strong></p></div>
+      <div>
+        <p class="etiqueta">TOTAL APORTADO</p>
+        <h1 id="total">…</h1>
+        <p>Este mês <strong id="total-mes">…</strong></p>
+      </div>
       <aside><strong>Dia 4 de cada mês</strong><span>Dia do aporte</span></aside>
     </section>
+
     <section id="pessoas" class="pessoas" aria-label="Totais por pessoa"></section>
+
     <section class="cartao bloco">
       <h2>Registrar aporte</h2>
       <form id="aporte">
@@ -122,6 +146,7 @@ service cloud.firestore {
       </form>
       <p id="retorno" class="mensagem" role="status"></p>
     </section>
+
     <section class="cartao bloco">
       <h2>Histórico</h2>
       <div class="filtros">
@@ -132,8 +157,10 @@ service cloud.firestore {
       <ul id="historico"></ul>
     </section>
   </div>
+
   <noscript>Ative o JavaScript para usar a Carteira a Dois.</noscript>
 </main>
+
 <script type="module">
   // Substitua este objeto pela configuração do seu app da Web no Firebase.
   const firebaseConfig = {
@@ -146,6 +173,7 @@ service cloud.firestore {
   const el = id => document.getElementById(id);
   const formatador = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });
   const moeda = centavos => formatador.format(centavos / 100);
+
   const hoje = () => {
     const partes = new Intl.DateTimeFormat("pt-BR", {
       timeZone: "America/Sao_Paulo", year: "numeric", month: "2-digit", day: "2-digit"
@@ -184,11 +212,13 @@ service cloud.firestore {
       import("https://www.gstatic.com/firebasejs/13.2.0/firebase-auth.js"),
       import("https://www.gstatic.com/firebasejs/13.2.0/firebase-firestore.js")
     ]);
+
     const app = appSDK.initializeApp(firebaseConfig);
     const auth = authSDK.getAuth(app);
     const db = dados.getFirestore(app);
     const membros = dados.collection(db, "membros");
     const aportes = dados.collection(db, "aportes");
+
     let nomes = new Map();
     let registros = [];
     let carregado = false;
@@ -228,6 +258,7 @@ service cloud.firestore {
       const uid = el("filtro-pessoa").value;
       const mes = el("filtro-mes").value;
       const visiveis = registros.filter(item => (!uid || item.autor === uid) && (!mes || item.data.startsWith(mes)));
+
       el("vazio").hidden = visiveis.length > 0;
       el("vazio").textContent = registros.length ? "Nenhum aporte para esses filtros." : "Os aportes registrados aparecerão aqui.";
       el("historico").replaceChildren(...visiveis.map(item => {
@@ -255,6 +286,7 @@ service cloud.firestore {
         login.querySelector("button").disabled = false;
       }
     });
+
     el("sair").addEventListener("click", () => authSDK.signOut(auth).catch(() => avisar("Não foi possível sair. Tente novamente.")));
     el("filtro-pessoa").addEventListener("change", renderizar);
     el("filtro-mes").addEventListener("change", renderizar);
@@ -266,14 +298,17 @@ service cloud.firestore {
       if (!auth.currentUser || !acesso || salvar.disabled) return;
       avisar();
       el("retorno").textContent = "";
+
       const valor = el("valor").value.trim().replace(",", ".");
       const centavos = Math.round(Number(valor) * 100);
       const data = el("data").value;
+
       if (!/^\d+(\.\d{1,2})?$/.test(valor) || centavos < 1 || centavos > 100000000 ||
           !/^\d{4}-\d{2}-\d{2}$/.test(data)) {
         avisar("Confira o valor e a data do aporte.");
         return;
       }
+
       const sessaoAtual = sessao;
       salvar.disabled = true;
       try {
@@ -296,6 +331,7 @@ service cloud.firestore {
       registros = [];
       carregado = false;
       acesso = false;
+
       el("painel").hidden = true;
       el("sessao").hidden = !conta;
       el("entrada").hidden = Boolean(conta);
@@ -327,19 +363,23 @@ service cloud.firestore {
           avisar("Sua conta ainda não tem acesso a esta carteira.");
           return;
         }
+
         el("usuario").textContent = perfil.data().nome || "Integrante";
+
         cancelar.push(dados.onSnapshot(membros, snapshot => {
           if (atual !== sessao) return;
           nomes = new Map(snapshot.docs.map(doc => [doc.id, doc.data().nome || "Integrante"]));
           el("usuario").textContent = nome(conta.uid);
           renderizar();
         }, falhaDeAcesso));
+
         cancelar.push(dados.onSnapshot(dados.query(aportes, dados.orderBy("data", "desc")), snapshot => {
           if (atual !== sessao) return;
           registros = snapshot.docs.map(doc => doc.data());
           carregado = true;
           renderizar();
         }, falhaDeAcesso));
+
         acesso = true;
         salvar.disabled = false;
         el("painel").hidden = false;
