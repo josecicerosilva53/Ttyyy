@@ -1,1 +1,356 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Carteira a Dois</title>
+  <style>
+:root{font-family:"DM Sans",system-ui,sans-serif;color:#142d29;background:#edf3ef;font-synthesis:none;line-height:1.5}
+*{box-sizing:border-box}
+body{margin:0}
+main{width:min(100% - 32px,900px);margin:auto;padding:22px 0 44px}
+header{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:24px}
+header div{display:flex;gap:16px;align-items:center}
+a{color:#1b5d4c}
+.marca{font-size:1.18rem;font-weight:850;text-decoration:none;color:inherit;letter-spacing:-.035em}
+.hero{background:linear-gradient(125deg,#102e28,#1b5140);color:white;border-radius:26px;padding:clamp(22px,5vw,45px);display:flex;align-items:end;justify-content:space-between;gap:20px}
+h1,h2,p{margin:0}
+h1{font-size:clamp(2.5rem,8vw,4.75rem);line-height:1.05;letter-spacing:-.065em;margin:.12em 0 .2em;overflow-wrap:anywhere}
+h2{font-size:1.13rem;letter-spacing:-.02em}
+.etiqueta{font-size:.74rem;font-weight:750;letter-spacing:.15em;color:#c4e8d4}
+.hero p:last-child{color:#d9eee5}
+.hero aside{border:1px solid #76a593;border-radius:14px;padding:12px 16px;font-size:.86rem;flex-shrink:0}
+aside span,time{display:block}
+aside span{color:#c4e8d4}
+.pessoas{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:14px 0}
+.cartao{background:#fff;border:1px solid #d5e4db;border-radius:18px;min-width:0}
+.pessoa{display:flex;align-items:flex-start;gap:12px;padding:clamp(12px,3vw,22px)}
+.pessoa strong{font-size:clamp(1rem,3vw,1.5rem);overflow-wrap:anywhere}
+.pessoa p,time,.vazio{font-size:.85rem;color:#49635a}
+.avatar{display:grid;place-items:center;background:#daf1e1;border-radius:50%;width:34px;height:34px;flex:none;font-weight:800}
+.douglas{background:#efe9d7}
+.bloco{padding:clamp(16px,4vw,26px);margin-bottom:14px}
+form,.filtros{display:grid;grid-template-columns:repeat(2,minmax(0,1fr)) auto;gap:12px;align-items:end;margin-top:13px}
+label{display:grid;gap:4px;font-size:.86rem;font-weight:700;min-width:0}
+input,select,button{font:inherit;min-height:44px;border-radius:10px}
+input,select{width:100%;min-width:0;border:1px solid #aebfb5;padding:8px 10px;font-size:1rem;color:inherit;background:white}
+button{background:#175e48;color:white;border:1px solid transparent;padding:8px 16px;cursor:pointer;font-weight:750}
+button:disabled{opacity:.6;cursor:default}
+.secundario{background:#ecf5ee;color:#17513e}
+:focus-visible{outline:3px solid #398a70;outline-offset:3px}
+.historico{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.filtros{grid-template-columns:repeat(2,minmax(0,190px))}
+ul{padding:0;margin:14px 0 0;list-style:none}
+li{display:flex;align-items:center;justify-content:space-between;gap:12px;border-top:1px solid #dce7e1;padding:12px 0}
+.vazio,.mensagem,.erro{margin-top:12px}
+.mensagem{color:#175e48}.erro{color:#9a3027}
+@media(max-width:560px){.hero{align-items:start;flex-direction:column;gap:12px}.hero aside{display:flex;gap:10px;flex-wrap:wrap}.pessoa{gap:7px}.avatar{width:25px;height:25px;font-size:.8rem}form button{grid-column:1/-1}}
+    [hidden]{display:none!important}
+    .entrada{max-width:480px;margin:0 auto}
+    .entrada form{grid-template-columns:1fr}
+    .entrada form button{justify-self:start}
+    .entrada h1{font-size:2rem;letter-spacing:-.04em}
+    .config{margin-top:18px}
+    summary{cursor:pointer;font-weight:750}
+    pre{overflow:auto;background:#edf3ef;padding:12px;border-radius:10px}
+    .config li{display:list-item;border:0;padding:4px 0}
+  </style>
+</head>
+<body>
+<main>
+  <header><a class="marca" href="./">Carteira a Dois</a><div id="sessao" hidden><span id="usuario"></span><button id="sair" class="secundario" type="button">Sair</button></div></header>
+  <p id="aviso" class="erro" role="alert" hidden></p>
+  <section id="config" class="cartao bloco" hidden>
+    <h2>Configurar o Firebase</h2>
+    <ol>
+      <li>No console do Firebase, crie um projeto e registre um app da Web. Copie o objeto <code>firebaseConfig</code> do seu projeto e substitua o bloco com esse nome no código deste HTML.</li>
+      <li>Em <strong>Authentication → Sign-in method</strong>, ative <strong>E-mail/senha</strong>. Na aba <strong>Users</strong>, crie uma conta para Cícero e outra para Douglas e copie o UID de cada conta.</li>
+      <li>Crie um banco <strong>Cloud Firestore</strong> em modo de produção. Na aba <strong>Rules</strong>, cole e publique as regras abaixo em um banco dedicado a esta carteira.</li>
+      <li>Na aba <strong>Data</strong>, crie a coleção <code>membros</code> com um documento para cada pessoa. Use o UID como ID do documento e adicione o campo <code>nome</code>, do tipo <strong>string</strong>, com o nome que deve aparecer no painel. Para trocar um nome, edite esse campo.</li>
+      <li>Hospede o HTML em HTTPS. Para abrir pela página inicial do site, salve como <code>index.html</code>. Abra o mesmo endereço nos dois celulares e entre com a conta de cada pessoa.</li>
+    </ol>
+    <details class="config"><summary>Regras do Firestore para copiar</summary>
+<pre id="regras">rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function membro() {
+      return request.auth != null
+        &amp;&amp; exists(/databases/$(database)/documents/membros/$(request.auth.uid));
+    }
+    match /membros/{uid} {
+      allow get: if request.auth != null
+        &amp;&amp; (request.auth.uid == uid || membro());
+      allow list: if membro();
+    }
+    match /aportes/{id} {
+      allow read: if membro();
+      allow create: if membro()
+        &amp;&amp; request.resource.data.keys().hasAll(['autor', 'centavos', 'data'])
+        &amp;&amp; request.resource.data.keys().hasOnly(['autor', 'centavos', 'data'])
+        &amp;&amp; request.resource.data.autor == request.auth.uid
+        &amp;&amp; request.resource.data.centavos is int
+        &amp;&amp; request.resource.data.centavos &gt; 0
+        &amp;&amp; request.resource.data.centavos &lt;= 100000000
+        &amp;&amp; request.resource.data.data is string
+        &amp;&amp; request.resource.data.data.matches('[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])');
+    }
+  }
+}</pre>
+    </details>
+  </section>
+  <section id="entrada" class="cartao bloco entrada" hidden>
+    <h1>Entrar na carteira</h1>
+    <form id="login">
+      <label>E-mail<input id="email" type="email" autocomplete="username" required></label>
+      <label>Senha<input id="senha" type="password" autocomplete="current-password" required></label>
+      <button type="submit">Entrar</button>
+    </form>
+  </section>
+  <div id="painel" hidden>
+    <section class="hero" aria-labelledby="total">
+      <div><p class="etiqueta">TOTAL APORTADO</p><h1 id="total">…</h1><p>Este mês <strong id="total-mes">…</strong></p></div>
+      <aside><strong>Dia 4 de cada mês</strong><span>Dia do aporte</span></aside>
+    </section>
+    <section id="pessoas" class="pessoas" aria-label="Totais por pessoa"></section>
+    <section class="cartao bloco">
+      <h2>Registrar aporte</h2>
+      <form id="aporte">
+        <label>Valor em reais<input id="valor" required inputmode="decimal" placeholder="Ex.: 60,00"></label>
+        <label>Data do aporte<input id="data" type="date" required></label>
+        <button type="submit">Adicionar aporte</button>
+      </form>
+      <p id="retorno" class="mensagem" role="status"></p>
+    </section>
+    <section class="cartao bloco">
+      <h2>Histórico</h2>
+      <div class="filtros">
+        <label>Pessoa<select id="filtro-pessoa"><option value="">Todos</option></select></label>
+        <label>Mês<select id="filtro-mes"><option value="">Todos</option></select></label>
+      </div>
+      <p id="vazio" class="vazio">Carregando histórico…</p>
+      <ul id="historico"></ul>
+    </section>
+  </div>
+  <noscript>Ative o JavaScript para usar a Carteira a Dois.</noscript>
+</main>
+<script type="module">
+  // Substitua este objeto pela configuração do seu app da Web no Firebase.
+  const firebaseConfig = {
+    apiKey: "COLE_A_API_KEY",
+    authDomain: "COLE_O_AUTH_DOMAIN",
+    projectId: "COLE_O_PROJECT_ID",
+    appId: "COLE_O_APP_ID"
+  };
+
+  const el = id => document.getElementById(id);
+  const formatador = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });
+  const moeda = centavos => formatador.format(centavos / 100);
+  const hoje = () => {
+    const partes = new Intl.DateTimeFormat("pt-BR", {
+      timeZone: "America/Sao_Paulo", year: "numeric", month: "2-digit", day: "2-digit"
+    }).formatToParts(new Date());
+    const valores = Object.fromEntries(partes.map(({ type, value }) => [type, value]));
+    return [valores.year, valores.month, valores.day].join("-");
+  };
+
+  function avisar(mensagem = "") {
+    el("aviso").textContent = mensagem;
+    el("aviso").hidden = !mensagem;
+  }
+
+  function elemento(tag, texto, classe) {
+    const node = document.createElement(tag);
+    if (texto !== undefined) node.textContent = texto;
+    if (classe) node.className = classe;
+    return node;
+  }
+
+  function preencherFiltro(id, itens, rotulo) {
+    const select = el(id);
+    const anterior = select.value;
+    select.replaceChildren(new Option("Todos", ""), ...itens.map(item => new Option(rotulo(item), item)));
+    if (itens.includes(anterior)) select.value = anterior;
+  }
+
+  async function iniciar() {
+    if (Object.values(firebaseConfig).some(valor => typeof valor !== "string" || valor.startsWith("COLE_"))) {
+      el("config").hidden = false;
+      return;
+    }
+
+    const [appSDK, authSDK, dados] = await Promise.all([
+      import("https://www.gstatic.com/firebasejs/13.2.0/firebase-app.js"),
+      import("https://www.gstatic.com/firebasejs/13.2.0/firebase-auth.js"),
+      import("https://www.gstatic.com/firebasejs/13.2.0/firebase-firestore.js")
+    ]);
+    const app = appSDK.initializeApp(firebaseConfig);
+    const auth = authSDK.getAuth(app);
+    const db = dados.getFirestore(app);
+    const membros = dados.collection(db, "membros");
+    const aportes = dados.collection(db, "aportes");
+    let nomes = new Map();
+    let registros = [];
+    let carregado = false;
+    let cancelar = [];
+    let sessao = 0;
+    let acesso = false;
+
+    function nome(uid) {
+      return nomes.get(uid) || "Ex-integrante";
+    }
+
+    function renderizar() {
+      if (!carregado) return;
+      const atuais = registros.filter(item => item.data.startsWith(hoje().slice(0, 7)));
+      const soma = itens => moeda(itens.reduce((total, item) => total + item.centavos, 0));
+      el("total").textContent = soma(registros);
+      el("total-mes").textContent = soma(atuais);
+
+      const pessoas = [...new Set([...nomes.keys(), ...registros.map(item => item.autor)])];
+      el("pessoas").replaceChildren(...pessoas.map((uid, indice) => {
+        const cartao = elemento("article", undefined, "cartao pessoa");
+        const avatar = elemento("span", nome(uid)[0], indice % 2 ? "avatar douglas" : "avatar");
+        avatar.setAttribute("aria-hidden", "true");
+        const texto = elemento("div");
+        texto.append(
+          elemento("h2", nome(uid)),
+          elemento("strong", soma(registros.filter(item => item.autor === uid))),
+          elemento("p", soma(atuais.filter(item => item.autor === uid)) + " este mês")
+        );
+        cartao.append(avatar, texto);
+        return cartao;
+      }));
+
+      const meses = [...new Set(registros.map(item => item.data.slice(0, 7)))];
+      preencherFiltro("filtro-pessoa", pessoas, nome);
+      preencherFiltro("filtro-mes", meses, mes => mes.split("-").reverse().join("/"));
+      const uid = el("filtro-pessoa").value;
+      const mes = el("filtro-mes").value;
+      const visiveis = registros.filter(item => (!uid || item.autor === uid) && (!mes || item.data.startsWith(mes)));
+      el("vazio").hidden = visiveis.length > 0;
+      el("vazio").textContent = registros.length ? "Nenhum aporte para esses filtros." : "Os aportes registrados aparecerão aqui.";
+      el("historico").replaceChildren(...visiveis.map(item => {
+        const linha = elemento("li");
+        const detalhe = elemento("div");
+        const data = elemento("time", item.data.split("-").reverse().join("/"));
+        data.dateTime = item.data;
+        detalhe.append(elemento("strong", nome(item.autor)), data);
+        linha.append(detalhe, elemento("strong", moeda(item.centavos)));
+        return linha;
+      }));
+    }
+
+    const login = el("login");
+    login.addEventListener("submit", async event => {
+      event.preventDefault();
+      avisar();
+      login.querySelector("button").disabled = true;
+      try {
+        await authSDK.signInWithEmailAndPassword(auth, el("email").value.trim(), el("senha").value);
+        login.reset();
+      } catch (erro) {
+        avisar(erro.code === "auth/network-request-failed" ? "Confira sua conexão e tente novamente." : "Não foi possível entrar. Confira seu e-mail e sua senha.");
+      } finally {
+        login.querySelector("button").disabled = false;
+      }
+    });
+    el("sair").addEventListener("click", () => authSDK.signOut(auth).catch(() => avisar("Não foi possível sair. Tente novamente.")));
+    el("filtro-pessoa").addEventListener("change", renderizar);
+    el("filtro-mes").addEventListener("change", renderizar);
+
+    const formulario = el("aporte");
+    const salvar = formulario.querySelector("button");
+    formulario.addEventListener("submit", async event => {
+      event.preventDefault();
+      if (!auth.currentUser || !acesso || salvar.disabled) return;
+      avisar();
+      el("retorno").textContent = "";
+      const valor = el("valor").value.trim().replace(",", ".");
+      const centavos = Math.round(Number(valor) * 100);
+      const data = el("data").value;
+      if (!/^\d+(\.\d{1,2})?$/.test(valor) || centavos < 1 || centavos > 100000000 ||
+          !/^\d{4}-\d{2}-\d{2}$/.test(data)) {
+        avisar("Confira o valor e a data do aporte.");
+        return;
+      }
+      const sessaoAtual = sessao;
+      salvar.disabled = true;
+      try {
+        await dados.addDoc(aportes, { autor: auth.currentUser.uid, centavos, data });
+        if (sessaoAtual !== sessao) return;
+        el("valor").value = "";
+        el("retorno").textContent = "Aporte registrado.";
+      } catch {
+        if (sessaoAtual === sessao) avisar("Não foi possível registrar o aporte. Confira o acesso e a conexão.");
+      } finally {
+        if (sessaoAtual === sessao) salvar.disabled = false;
+      }
+    });
+
+    authSDK.onAuthStateChanged(auth, async conta => {
+      const atual = ++sessao;
+      cancelar.forEach(parar => parar());
+      cancelar = [];
+      nomes = new Map();
+      registros = [];
+      carregado = false;
+      acesso = false;
+      el("painel").hidden = true;
+      el("sessao").hidden = !conta;
+      el("entrada").hidden = Boolean(conta);
+      el("usuario").textContent = "";
+      el("retorno").textContent = "";
+      el("total").textContent = "…";
+      el("total-mes").textContent = "…";
+      el("pessoas").replaceChildren();
+      el("historico").replaceChildren();
+      el("vazio").hidden = false;
+      el("vazio").textContent = "Carregando histórico…";
+      formulario.reset();
+      el("data").value = hoje();
+      salvar.disabled = true;
+      avisar();
+      if (!conta) return;
+
+      const falhaDeAcesso = () => {
+        if (atual !== sessao) return;
+        acesso = false;
+        el("painel").hidden = true;
+        avisar("Não foi possível acessar a carteira. Confira a conexão e a configuração no Firestore.");
+      };
+
+      try {
+        const perfil = await dados.getDocFromServer(dados.doc(membros, conta.uid));
+        if (atual !== sessao) return;
+        if (!perfil.exists()) {
+          avisar("Sua conta ainda não tem acesso a esta carteira.");
+          return;
+        }
+        el("usuario").textContent = perfil.data().nome || "Integrante";
+        cancelar.push(dados.onSnapshot(membros, snapshot => {
+          if (atual !== sessao) return;
+          nomes = new Map(snapshot.docs.map(doc => [doc.id, doc.data().nome || "Integrante"]));
+          el("usuario").textContent = nome(conta.uid);
+          renderizar();
+        }, falhaDeAcesso));
+        cancelar.push(dados.onSnapshot(dados.query(aportes, dados.orderBy("data", "desc")), snapshot => {
+          if (atual !== sessao) return;
+          registros = snapshot.docs.map(doc => doc.data());
+          carregado = true;
+          renderizar();
+        }, falhaDeAcesso));
+        acesso = true;
+        salvar.disabled = false;
+        el("painel").hidden = false;
+      } catch {
+        falhaDeAcesso();
+      }
+    });
+  }
+
+  iniciar().catch(() => avisar("Não foi possível iniciar o Firebase. Confira a configuração e a conexão."));
+</script>
+</body>
+</html>
 
